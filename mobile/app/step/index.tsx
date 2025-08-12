@@ -1,5 +1,6 @@
 import { Header } from '@/components/header';
 import Input from '@/components/input';
+import { useDataStore } from '@/store/data';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { router } from 'expo-router';
 import { useForm } from 'react-hook-form';
@@ -19,10 +20,18 @@ type FormData = z.infer<typeof schema>
 export default function Step() {
     const { control, handleSubmit, formState: { errors, isValid } } = useForm<FormData>({
         resolver: zodResolver(schema)
-    })
+    });
+
+    const setPageOne = useDataStore(state => state.setPageOne);
 
     function handleCreate(data: FormData) {
-        console.log(data);
+        console.log("Passando os dados");
+        setPageOne({
+            name: data.name,
+            weight: data.weight,
+            height: data.height,
+            age: data.age
+        });
 
         router.push("/generate");
     }

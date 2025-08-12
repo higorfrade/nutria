@@ -5,5 +5,6 @@ export const colors = {
   white: '#FFF',
   error: '#f82222ff',
   button: '#9497fc',
+  share: '#1E90FF',
   black: '#000'
 };
